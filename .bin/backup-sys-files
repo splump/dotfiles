@@ -25,6 +25,7 @@ while read SRCFILE; do
 			echo "Adding new file: $FILENAME"
 			mkdir -p $BACKUPFOLDER
 			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
+			echo ""
 			NEWFILE="${SRCFILE##*/}"
 			NEWFILES="$NEWFILE $NEWFILES"
 			continue
@@ -39,6 +40,7 @@ while read SRCFILE; do
 			echo "$FILENAME has been updated, syncing changes to $BACKUPFOLDER"
 			mkdir -p $BACKUPFOLDER
 			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
+			echo ""
 			UPDATEDFILE="${SRCFILE##*/}"
 			UPDATEDFILES="$UPDATEDFILE $UPDATEDFILES"
 		fi
