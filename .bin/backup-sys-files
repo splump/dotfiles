@@ -32,16 +32,13 @@ while read SRCFILE; do
 		
 		# If you found a backup of the file, diff it with the source file		    	
 		DIFFDSTFILE="$(find $BACKUPREPO -name $FILENAME -printf '%T@ %p\n' | sort -nr | head -1 | awk '{print $2}')"
-		DIFFCONTENT="$(diff -Naur "$SRCFILE" "$DIFFDSTFILE")"
+		diff "$SRCFILE" "$DIFFDSTFILE" > /dev/null 2>&1
 		
 		# If the sourcefile has been updated, create a new backup for it
 		if [ $? -ne 0 ]; then
 			echo "$FILENAME has been updated, syncing changes to $BACKUPFOLDER"
 			mkdir -p $BACKUPFOLDER
 			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
-			if [ ! -z "$DIFFCONTENT" ]; then
-				echo "$DIFFCONTENT" > "${BACKUPFOLDER}${FILENAME}.diff"
-			fi
 			UPDATEDFILE="${SRCFILE##*/}"
 			UPDATEDFILES="$UPDATEDFILE $UPDATEDFILES"
 		fi
@@ -59,4 +56,3 @@ done < $FILELIST
 if [ -z "${UPDATEDFILES// }" -a -z "${NEWFILES// }" ]; then
 	echo "No newly added files or updates"
 fi
-
