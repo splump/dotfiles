@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# SETUP #
+SERVERIP=10.0.0.3
+SERVERPORT=8080
+SERVERMAC=c8:bc:c8:a3:36:b8
+
+#wol $SERVERMAC
+#sleep 10
+echo "Sending command to clean video library"
+curl --data-binary '{ "jsonrpc": "2.0", "id": "mybash", "method": "VideoLibrary.Clean"}' -H 'content-type: application/json;' http://kodi:k4k0d1rv@$SERVERIP:$SERVERPORT/jsonrpc &> /dev/null
+exit 0

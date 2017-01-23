@@ -1,0 +1,11 @@
+#!/bin/bash
+
+album="$*"
+
+~/.venv/beets/bin/beet import "$album"
+
+if [ $? -eq 0 ]; then
+	update-music-library
+else
+	echo "Import failed, not updating library"
+fi

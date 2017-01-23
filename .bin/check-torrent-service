@@ -1,0 +1,73 @@
+#!/bin/bash
+
+do-status-check () {
+	if [ $? -eq 0 ]; then
+		echo "DONE"
+	else
+		echo "FAILED"
+		transmission_config=""
+		transmission_bind_ip=""
+		vpn_ip=""
+	fi
+}
+
+transmission_config="/home/splump/.config/transmission-daemon/settings.json"
+transmission_bind_ip=$(grep ipv4 $transmission_config | awk '{match($0,/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/); ip = substr($0,RSTART,RLENGTH); print ip}')
+
+echo -n "Checking if transmission.service is running: "
+if [[ $(systemctl is-active transmission) != active ]]; then
+   echo "transmission.service is not running"
+else
+   echo "RUNNING"
+   echo "transmission.service is configured to use $transmission_bind_ip"
+fi
+
+
+while true; do
+
+	sleep 5
+
+	systemctl is-active transmission >/dev/null 2>&1
+	
+	if [ $? -ne 0 ]; then
+		echo "Transmission has stopped, please restart it" 
+		continue
+	fi
+	
+	transmission_bind_ip=$(grep ipv4 $transmission_config | awk '{match($0,/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/); ip = substr($0,RSTART,RLENGTH); print ip}')
+	vpn_ip=$(ip addr show tun0 | grep "inet\b" | awk '{print $2}' | rev | cut -c 4- | rev)
+	
+	if [[ $transmission_bind_ip != $vpn_ip ]]; then
+		echo "Transmission is incorrectly configured, attempting to reconfigure"
+		echo -n "Stopping transmission service: "
+		sudo systemctl stop transmission
+		do-status-check
+	
+		vpn_ip=""
+		i=0
+		while [ -z "$vpn_ip" ]; do
+		    if [ "$i" -eq "10" ]; then
+		        error_msg="Could not obtain an ip-adress from tun0, exiting"
+		        echo $error_msg
+		       # exit 1
+		    fi
+		    vpn_ip=$(ip addr show tun0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+		    sleep 1
+		    let i=i+1
+		done
+	
+		echo -n "Reconfiguring transmission bind-address-ipv4: "
+		sed -i "s/^.*ipv4.*/    \"bind-address-ipv4\": \"$vpn_ip\",/" $transmission_config
+		do-status-check
+	
+		echo -n "Starting transmission: "
+		sudo systemctl start transmission
+		do-status-check
+	
+		echo -n "Transmission has been configured as follows:"
+		grep ipv4 $transmission_config
+	
+		vpn_ip=""
+	fi
+
+done

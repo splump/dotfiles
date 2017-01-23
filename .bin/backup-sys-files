@@ -1,0 +1,62 @@
+#!/bin/bash
+USER="splump"
+HOST="bishop"
+FILELIST="/home/$USER/.config/filelist"
+BACKUPREPO="/hive/backup/$HOST"
+DATE=$(date +"%Y-%m-%d_%H:%M:%S")
+
+if [ "$(whoami)" != "root" ]; then
+	echo "You need to run this script with sudo"
+	exit 1
+fi
+
+while read SRCFILE; do
+	if [ ! -z $(echo $SRCFILE | grep -v '^#') ]; then
+
+		# Set necessary variables
+		FILENAME="${SRCFILE##*/}"
+		BACKUPFOLDER="${BACKUPREPO}$(dirname $SRCFILE)/${DATE}/"
+
+		# Check if you can find a copy of SRCFILE in the backup repository
+		find $BACKUPREPO -name $FILENAME | egrep '.*' > /dev/null 2>&1
+
+		# If file can not be found, then create a folder for it and rsync it
+		if [ $? -ne 0 ]; then
+			echo "Adding new file: $FILENAME"
+			mkdir -p $BACKUPFOLDER
+			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
+			NEWFILE="${SRCFILE##*/}"
+			NEWFILES="$NEWFILE $NEWFILES"
+			continue
+		fi
+		
+		# If you found a backup of the file, diff it with the source file		    	
+		DIFFDSTFILE="$(find $BACKUPREPO -name $FILENAME -printf '%T@ %p\n' | sort -nr | head -1 | awk '{print $2}')"
+		DIFFCONTENT="$(diff -Naur "$SRCFILE" "$DIFFDSTFILE")"
+		
+		# If the sourcefile has been updated, create a new backup for it
+		if [ $? -ne 0 ]; then
+			echo "$FILENAME has been updated, syncing changes to $BACKUPFOLDER"
+			mkdir -p $BACKUPFOLDER
+			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
+			if [ ! -z "$DIFFCONTENT" ]; then
+				echo "$DIFFCONTENT" > "${BACKUPFOLDER}${FILENAME}.diff"
+			fi
+			UPDATEDFILE="${SRCFILE##*/}"
+			UPDATEDFILES="$UPDATEDFILE $UPDATEDFILES"
+		fi
+	fi
+done < $FILELIST
+
+#if [ ! -z ${NEWFILES// } ]; then
+#	echo "$NEWFILES has been added"
+#fi
+#
+#if [ ! -z ${UPDATEDFILES// } ]; then
+#	echo "$UPDATEDFILES has been updated"
+#fi
+
+if [ -z "${UPDATEDFILES// }" -a -z "${NEWFILES// }" ]; then
+	echo "No newly added files or updates"
+fi
+
