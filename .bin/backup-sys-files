@@ -10,6 +10,13 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
+writeBackup () {
+	mkdir -p $BACKUPFOLDER
+	rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
+	echo $SRCFILE > "${BACKUPFOLDER}".${FILENAME}.path
+	echo ""
+}
+
 while read SRCFILE; do
 	if [ ! -z $(echo $SRCFILE | grep -v '^#') ]; then
 
@@ -23,9 +30,7 @@ while read SRCFILE; do
 		# If file can not be found, then create a folder for it and rsync it
 		if [ $? -ne 0 ]; then
 			echo "Adding new file: $FILENAME"
-			mkdir -p $BACKUPFOLDER
-			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
-			echo ""
+			writeBackup
 			NEWFILE="${SRCFILE##*/}"
 			NEWFILES="$NEWFILE $NEWFILES"
 			continue
@@ -38,9 +43,7 @@ while read SRCFILE; do
 		# If the sourcefile has been updated, create a new backup for it
 		if [ $? -ne 0 ]; then
 			echo "$FILENAME has been updated, syncing changes to $BACKUPFOLDER"
-			mkdir -p $BACKUPFOLDER
-			rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
-			echo ""
+			writeBackup
 			UPDATEDFILE="${SRCFILE##*/}"
 			UPDATEDFILES="$UPDATEDFILE $UPDATEDFILES"
 		fi
