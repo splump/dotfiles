@@ -34,7 +34,7 @@ filetype plugin indent on    " required
 "set t_8b=^[[48;2;%lu;%lu;%lum
 
 " Change the color scheme here.
-colorscheme PaperColor
+colorscheme gruvbox
 set background=dark
 
 " Makes the background transparent. Leave these out if you're not using a transparent
@@ -55,9 +55,9 @@ set showcmd                     " display incomplete commands
 " set t_Co=256
 
 "if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+"  " disable Background Color Erase (BCE) so that color schemes
+"  " render properly when inside 256-color tmux and GNU screen.
+"  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
 "endif
 
