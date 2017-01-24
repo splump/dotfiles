@@ -21,7 +21,7 @@ alias top="htop"
 alias newt="ssh root@newt"
 
 export SUDO_EDITOR=vim
-export PATH="$HOME/.venv/powerline/bin:$HOME/.dotfiles/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
