@@ -32,6 +32,8 @@ else
 	COUNT=0
 	while read -r LINE; do
 		FILEPOINTERS+=("$LINE")
+		FILEPATH="$(dirname $LINE)"
+		DIFFSOURCES+=("${FILEPATH}/.$FILENAME.path")
 		let COUNT=COUNT+1
 	done <<< "$SEARCHRESULT"
 fi
@@ -52,8 +54,27 @@ while true; do
 	else
 		let FILENUMBER=FILENUMBER-1
 		CHOICE="${FILEPOINTERS[$FILENUMBER]}"
+		DIFFSOURCE="${DIFFSOURCES[$FILENUMBER]}"
 		echo ""
-		echo "diff $CHOICE with"
+	 	colordiff -Naur $CHOICE $(cat $DIFFSOURCE)
+
+		if [ $? = 0 ]; then
+			echo "No difference between files"
+			else
+			echo ""
+			echo -n "(R)eplace original with backup?: "
+			read ACTION
+			shopt -s nocasematch
+
+			case "$ACTION" in
+				r) echo Replace
+				;;
+
+				*) echo Something else? 
+				;;
+			esac
+
+		fi
 	fi 
 
 done
