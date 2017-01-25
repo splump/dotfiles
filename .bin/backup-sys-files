@@ -50,14 +50,6 @@ while read SRCFILE; do
 	fi
 done < $FILELIST
 
-#if [ ! -z ${NEWFILES// } ]; then
-#	echo "$NEWFILES has been added"
-#fi
-#
-#if [ ! -z ${UPDATEDFILES// } ]; then
-#	echo "$UPDATEDFILES has been updated"
-#fi
-
 if [ -z "${UPDATEDFILES// }" -a -z "${NEWFILES// }" ]; then
 	echo "No newly added files or updates"
 fi
