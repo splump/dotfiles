@@ -1,14 +1,21 @@
 #!/bin/bash
+#
+# This script has a dependency on package colordiff. Either install it or modifiy it to use regular diff.
+# See comment below on where to do that.
+#
 
-FILENAME="$1"
-HOST="bishop"
-FILELIST="/home/$USER/.config/filelist"
+# User defined variables
+HOST="$(hostname)"
 BACKUPREPO="/hive/backup/$HOST"
 
+# Define some colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+FILENAME="$1"
+
+# Function to show list of files
 showFileList () {
 	INDEX=1
 	for FILEPOINTER in "${FILEPOINTERS[@]}"; do
@@ -17,7 +24,7 @@ showFileList () {
 	done
 }
 
-
+# Function to replace original with backup file
 replaceFile () {
 	printf '\e[A\e[K'
 	echo -e "Really replace?"
@@ -28,6 +35,7 @@ replaceFile () {
 	
 	read ANSWER
 	if [ $ANSWER == "y" ]; then
+	 	echo "mv $(cat $DIFFSOURCE) "$(cat $DIFFSOURCE)".bak"
 		echo "cp $CHOICE $(cat $DIFFSOURCE)"  
 		echo "$(cat $DIFFSOURCE) replaced with $CHOICE"
 		exit 0
@@ -37,9 +45,10 @@ replaceFile () {
 	fi
 }
 
-
+# Make answers non case sensitive
 shopt -s nocasematch
 
+# Check that we are running as root
 if [ "$(whoami)" != "root" ]; then
 	echo "You need to run this script with sudo"
 	exit 1
@@ -73,12 +82,16 @@ while true; do
 	showFileList
 	
 
-	echo -en "\nDiff original with which (N) file?: "
+	echo -en "\nDiff original with which (n) file?: "
 	read FILENUMBER
 
-	if [ -z "$FILENUMBER" ] || [ "$FILENUMBER" -gt $COUNT -o "$FILENUMBER" -lt 1 ] ; then
+	if [[ ! "$FILENUMBER" =~ ^[0-9]*$ ]] ; then
+		echo "Only valid input is numbers or (q)uit"
+		sleep 2
+		continue
+	elif [ $FILENUMBER -gt $COUNT -o $FILENUMBER -lt 1 ] ; then
 		echo "Please input a number between 1 and $COUNT"
-		sleep 3
+		sleep 2
 	else
 		let FILENUMBER=FILENUMBER-1
 		CHOICE="${FILEPOINTERS[$FILENUMBER]}"
@@ -86,6 +99,7 @@ while true; do
 		echo ""
 	 	colordiff -Naur $(cat $DIFFSOURCE) $CHOICE 
 
+		# If there is no difference between files, return to menu. 
 		if [ $? = "0" ]; then
 			echo -n "No difference between files"
 			sleep 2
@@ -98,6 +112,7 @@ while true; do
 				;;
 				
 				*) echo ""
+				;;
 			esac
 
 		fi

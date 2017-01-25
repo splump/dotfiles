@@ -1,15 +1,21 @@
 #!/bin/bash
+
+# User defined variables
 USER="splump"
-HOST="bishop"
+HOST="$(hostname)"
 FILELIST="/home/$USER/.config/filelist"
 BACKUPREPO="/hive/backup/$HOST"
+
+# Don't set a stupid DATE variable because bash reasons
 DATE=$(date +"%Y-%m-%d_%H:%M:%S")
 
+# Check that we are running as root
 if [ "$(whoami)" != "root" ]; then
 	echo "You need to run this script with sudo"
 	exit 1
 fi
 
+#Function to write backup
 writeBackup () {
 	mkdir -p $BACKUPFOLDER
 	rsync -p -P $SRCFILE ${BACKUPFOLDER}${FILENAME}
@@ -50,6 +56,7 @@ while read SRCFILE; do
 	fi
 done < $FILELIST
 
+# Print some nice info if nothing was found to do
 if [ -z "${UPDATEDFILES// }" -a -z "${NEWFILES// }" ]; then
 	echo "No newly added files or updates"
 fi
