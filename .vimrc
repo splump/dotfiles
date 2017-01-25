@@ -8,7 +8,7 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
+"" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'NLKNguyen/papercolor-theme'
@@ -34,13 +34,13 @@ filetype plugin indent on    " required
 "set t_8b=^[[48;2;%lu;%lu;%lum
 
 " Change the color scheme here.
-colorscheme gruvbox
+colorscheme PaperColor
 set background=dark
 
 " Makes the background transparent. Leave these out if you're not using a transparent
 " terminal.
-highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermbg=NONE guibg=NONE
+"highlight Normal ctermbg=NONE guibg=NONE
+"highlight NonText ctermbg=NONE guibg=NONE
 
 " This is what sets vim to use 24-bit colors. It will also work for any version of neovim
 " newer than 0.1.4.
