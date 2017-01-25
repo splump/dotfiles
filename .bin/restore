@@ -41,12 +41,10 @@ fi
 
 while true; do
 
-	echo ""
-	echo "Found $COUNT backups"
+	echo -e "\nFound $COUNT backups"
 	showFileList
 	
-	echo ""
-	echo -n "Diff original with which (N) file?: "
+	echo -en "\nDiff original with which (N) file?: "
 	read FILENUMBER
 
 	if [ "$FILENUMBER" -gt "$COUNT" -o "$FILENUMBER" -lt "1" ]; then
@@ -61,8 +59,7 @@ while true; do
 		if [ $? = 0 ]; then
 			echo "No difference between files"
 		else
-			echo ""
-			echo -n "Diff original with another file or (R)eplace?: "
+			echo -en "\nDiff original with another file or (R)eplace?: "
 			read ACTION
 			shopt -s nocasematch
 
