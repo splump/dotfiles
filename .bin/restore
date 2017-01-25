@@ -5,6 +5,10 @@ HOST="bishop"
 FILELIST="/home/$USER/.config/filelist"
 BACKUPREPO="/hive/backup/$HOST"
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
 showFileList () {
 	INDEX=1
 	for FILEPOINTER in "${FILEPOINTERS[@]}"; do
@@ -12,6 +16,29 @@ showFileList () {
 		let INDEX=INDEX+1
 	done
 }
+
+
+replaceFile () {
+	printf '\e[A\e[K'
+	echo -e "Really replace?"
+	echo -e "${RED}---${NC} $(cat $DIFFSOURCE)"
+	echo -e "with"
+	echo -e "${GREEN}+++${NC} $CHOICE\n"
+	echo -en "Answer (y)es, or any other key will abort: "
+	
+	read ANSWER
+	if [ $ANSWER == "y" ]; then
+		echo "cp $CHOICE $(cat $DIFFSOURCE)"  
+		echo "$(cat $DIFFSOURCE) replaced with $CHOICE"
+		exit 0
+	else 
+		echo -e "Aborting\n"
+		continue
+	fi
+}
+
+
+shopt -s nocasematch
 
 if [ "$(whoami)" != "root" ]; then
 	echo "You need to run this script with sudo"
@@ -40,35 +67,37 @@ fi
 
 
 while true; do
+	clear
 
 	echo -e "\nFound $COUNT backups"
 	showFileList
 	
+
 	echo -en "\nDiff original with which (N) file?: "
 	read FILENUMBER
 
-	if [ "$FILENUMBER" -gt "$COUNT" -o "$FILENUMBER" -lt "1" ]; then
-		echo "Choice is out of range"
+	if [ -z "$FILENUMBER" ] || [ "$FILENUMBER" -gt $COUNT -o "$FILENUMBER" -lt 1 ] ; then
+		echo "Please input a number between 1 and $COUNT"
+		sleep 3
 	else
 		let FILENUMBER=FILENUMBER-1
 		CHOICE="${FILEPOINTERS[$FILENUMBER]}"
 		DIFFSOURCE="${DIFFSOURCES[$FILENUMBER]}"
 		echo ""
-	 	colordiff -Naur $CHOICE $(cat $DIFFSOURCE)
+	 	colordiff -Naur $(cat $DIFFSOURCE) $CHOICE 
 
-		if [ $? = 0 ]; then
-			echo "No difference between files"
+		if [ $? = "0" ]; then
+			echo -n "No difference between files"
+			sleep 2
 		else
-			echo -en "\nDiff original with another file or (R)eplace?: "
+			echo -en "\n(R)eplace? (Any other key will return to list of backups): "
 			read ACTION
-			shopt -s nocasematch
 
 			case "$ACTION" in
-				r) echo Replace
+				r) replaceFile
 				;;
-
-				*) echo
-				;;
+				
+				*) echo ""
 			esac
 
 		fi
