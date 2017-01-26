@@ -35,10 +35,10 @@ replaceFile () {
 	
 	read ANSWER
 	if [ $ANSWER == "y" ]; then
-	 	echo -e "\nDEBUG: mv $(cat $DIFFSOURCE) "$(cat $DIFFSOURCE)".bak"
-		echo "DEBUG: cp $CHOICE $(cat $DIFFSOURCE)"  
-		echo -e "\n$(cat $DIFFSOURCE) replaced with $CHOICE"
-		echo "A backup of original has been saved to "$(cat $DIFFSOURCE)".bak"
+	 	echo -e "\nDEBUG: ${RED}mv $(cat $DIFFSOURCE) "$(cat $DIFFSOURCE)".bak${NC}"
+		echo -e "DEBUG: ${RED}cp $CHOICE $(cat $DIFFSOURCE)${NC}"  
+		echo -e "\n${RED}$(cat $DIFFSOURCE)${NC} replaced with ${GREEN}$CHOICE${NC}"
+		echo -e "A backup of original has been saved to "${GREEN}$(cat $DIFFSOURCE)".bak${NC}"
 		exit 0
 	else 
 		echo -e "Aborting\n"
