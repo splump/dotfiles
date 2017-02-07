@@ -29,10 +29,6 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" The "^[" is a single character. You enter it by pressing Ctrl+v and then ESC.
-"set t_8f=^[[38;2;%lu;%lu;%lum
-"set t_8b=^[[48;2;%lu;%lu;%lum
-
 " Change the color scheme here.
 colorscheme PaperColor
 set background=dark
@@ -52,20 +48,20 @@ set number
 set mouse-=a
 set encoding=utf-8
 set showcmd                     " display incomplete commands   
-" set t_Co=256
+set t_Co=256
 
 "if &term =~ '256color'
 "  " disable Background Color Erase (BCE) so that color schemes
 "  " render properly when inside 256-color tmux and GNU screen.
 "  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-  set t_ut=
+set t_ut=
 "endif
 
 " ~/.vimrc
 " Make Vim recognize XTerm escape sequences for Page and Arrow
 " keys combined with modifiers such as Shift, Control, and Alt.
 " See http://www.reddit.com/r/vim/comments/1a29vk/_/c8tze8p
-if &term =~ '^screen'
+if &term =~ 'xterm'
   " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
   execute "set t_kP=\e[5;*~"
   execute "set t_kN=\e[6;*~"
@@ -92,4 +88,3 @@ set noshowmode
 
 nnoremap <Tab> <c-w>w
 nnoremap <S-Tab> <c-w>W
-"colorscheme darkblue
