@@ -74,7 +74,9 @@ if &term =~ 'xterm'
 endif
 
 set nowrap                      " don't wrap lines              
-set tabstop=4 shiftwidth=4      " a tab is two spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4      			" a tab is two spaces
 set expandtab                   " use spaces, not tabs          
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set paste
@@ -82,9 +84,12 @@ set hlsearch                    " highlight matches
 set incsearch                   " incremental searching         
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital l
-set smarttab
+"set smarttab
 "set laststatus=2				" always show status line
 set noshowmode
 
 nnoremap <Tab> <c-w>w
 nnoremap <S-Tab> <c-w>W
+
+" Highlight whitespace(s) at the end of line.
+autocmd VimEnter * :call matchadd('Error', '\s\+$', -1) | call matchadd('Error', '\%u00A0')
