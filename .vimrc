@@ -13,6 +13,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'dracula/vim'
+Plugin 'mbbill/VimExplorer'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,6 +51,12 @@ set mouse-=a
 set encoding=utf-8
 set showcmd                     " display incomplete commands   
 set t_Co=256
+
+nnoremap <Tab> <c-w>w
+nnoremap <S-Tab> <c-w>W
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
 
 "if &term =~ '256color'
 "  " disable Background Color Erase (BCE) so that color schemes
