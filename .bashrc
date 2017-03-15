@@ -4,6 +4,8 @@
 
 #export TERM=xterm-256color
 
+# Import ssh aliases
+source ~/.ssh_aliases
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
