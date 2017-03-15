@@ -90,7 +90,7 @@ set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital l
-set laststatus=2				" always show status line
+set laststatus=1				" always show status line
 "set noshowmode
 
 " Highlight whitespace(s) at the end of line.
