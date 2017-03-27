@@ -29,15 +29,12 @@ shopt -s checkwinsize
 bashgitprompt='$(__git_ps1)'
 source /usr/share/git/completion/git-prompt.sh
 
-if [[ ${EUID} == 0 ]] ; then
-  PS1="\[\033[38;5;1m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;69m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;1m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
-else
-  PS1="\[\033[38;5;249m\]\u\[$(tput sgr0)\]\[\033[38;5;245m\]@\[$(tput sgr0)\]\[\033[38;5;240m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]"$bashgitprompt" \[$(tput sgr0)\]\[\033[38;5;5m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+if [[ $(hostname) == "ash" ]]; then
+	source .env_ash
 fi
 
-#powerline-daemon -q
-#POWERLINE_BASH_CONTINUATION=1
-#POWERLINE_BASH_SELECT=1
-#. /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+if [[ $(hostname) == "bishop" ]]; then
+	source .env_bishop
+fi
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
