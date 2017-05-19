@@ -30,11 +30,11 @@ bashgitprompt='$(__git_ps1)'
 source /usr/share/git/completion/git-prompt.sh
 
 if [[ $(hostname) == "ash" ]]; then
-	source .env_ash
+	source ~/.env_ash
 fi
 
 if [[ $(hostname) == "bishop" ]]; then
-	source .env_bishop
+	source ~/.env_bishop
 fi
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
