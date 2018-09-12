@@ -2,11 +2,13 @@
 # ~/.bashrc
 #
 
-#export TERM=xterm-256color
+# Source additional files
 
-# Import ssh aliases
-source ~/.ssh_aliases
-source ~/.bash_aliases
+for i in ~/.ssh_aliases ~/.bash_aliases ~/.env_$(hostname); do
+  if [[ -e "$i" ]]; then
+    source "$i"
+  fi
+done
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -28,13 +30,5 @@ shopt -s checkwinsize
 # Git stuff
 bashgitprompt='$(__git_ps1)'
 source /usr/share/git/completion/git-prompt.sh
-
-if [[ $(hostname) == "ash" ]]; then
-	source ~/.env_ash
-fi
-
-if [[ $(hostname) == "bishop" ]]; then
-	source ~/.env_bishop
-fi
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
