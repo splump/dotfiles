@@ -9,3 +9,4 @@ alias last="last --fulltimes"
 alias sudo="sudo -E "
 alias pacman="pacman --color auto"
 alias top="htop"
+alias remmina='rm -f $HOME/.config/freerdp/known_hosts2 && remmina'
