@@ -12,7 +12,7 @@ source ~/.bash_aliases
 [[ $- != *i* ]] && return
 
 export SUDO_EDITOR=vim
-export PATH="$PATH:$HOME/.bin:/usr/bin/core_perl"
+export PATH="$HOME/.bin:$PATH:/usr/bin/core_perl"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
