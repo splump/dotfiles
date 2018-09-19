@@ -4,7 +4,17 @@
 
 # Source additional files
 
-for i in ~/.ssh_aliases ~/.bash_aliases ~/.env_$(hostname); do
+sourceme=(
+	"$HOME/.ssh_aliases"
+	"$HOME/.bash_aliases"
+	"$HOME/.env_$(hostname)"
+	#Requires bash-completion to be installed
+	"/usr/share/bash-completion/bash_completion"
+	# Requires command-not-found to be installed
+	"/etc/profile.d/cnf.sh"
+)
+
+for i in ${sourceme[@]}; do
   if [[ -e "$i" ]]; then
     source "$i"
   fi
@@ -23,8 +33,6 @@ export HISTIGNORE=
 export HISTSIZE=2000
 export HISTTIMEFORMAT="%a %b %Y %T %z "
 
-complete -cf sudo
-[ -r /etc/profile.d/cnf.sh ] && . /etc/profile.d/cnf.sh
 shopt -s checkwinsize
 
 # Git stuff
