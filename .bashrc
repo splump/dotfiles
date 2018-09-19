@@ -33,6 +33,7 @@ export HISTIGNORE=
 export HISTSIZE=2000
 export HISTTIMEFORMAT="%a %b %Y %T %z "
 
+# Check windowsize after each command
 shopt -s checkwinsize
 
 # Git stuff
