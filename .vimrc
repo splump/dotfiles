@@ -49,7 +49,6 @@ set mouse-=a
 
 set encoding=utf-8
 set showcmd                     " display incomplete commands
-"set t_Co=256
 
 " Bind Tab to switch between panes
 nnoremap <Tab> <c-w>w
@@ -84,8 +83,7 @@ if &term =~ 'xterm'
 endif
 
 set nowrap                      " don't wrap lines
-set tabstop=4
-set softtabstop=4
+set tabstop=2
 set shiftwidth=2      			" a tab is two spaces
 set expandtab                   " use spaces, not tabs
 set backspace=indent,eol,start  " backspace through everything in insert mode
