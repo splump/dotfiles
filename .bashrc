@@ -27,10 +27,10 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Source additional files if available
 
 sourceme=(
-	"$HOME/.ssh_aliases"
-	"$HOME/.bash_aliases"
-	"$HOME/.env_$(hostname)"
-  "/usr/share/git/completion/git-prompt.sh"
+  "$HOME/dotfiles/.ssh_aliases"
+  "$HOME/dotfiles/.bash_aliases"
+  "$HOME/dotfiles/.env_$(hostname)"
+  "$HOME/dotfiles/git-prompt.sh"
   #Requires bash-completion to be installed
   "/usr/share/bash-completion/bash_completion"
   #Requires command-not-found to be installed
