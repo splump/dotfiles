@@ -1,5 +1,6 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Be improved
+set nocompatible
+filetype off
 
 " Change the color scheme
 colorscheme PaperColor
@@ -12,27 +13,32 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" Syntax highlighting
-syntax enable
-
-" Numbered lines
-set number
-
-"Disable mouse
+" Disable vim mouse highlighting
 set mouse-=a
 
+" Misc settings
+syntax enable
 set encoding=utf-8
-set showcmd                     " display incomplete commands
+set number
+set showcmd
+set nowrap                      " don't wrap lines
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2      					" a tab is two spaces
+set expandtab                   " use spaces, not tabs
+set smarttab
+set backspace=indent,eol,start  " backspace through everything in insert mode
+" set paste
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital l
+set laststatus=1								" always show status line
+"set noshowmode
 
 " Bind Tab to switch between panes
 nnoremap <Tab> <c-w>w
 nnoremap <S-Tab> <c-w>W
-
-" Nerdtree stuff
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Bind CTRL+N to toggle NerdTree
-map <C-n> :NERDTreeToggle<CR>
 
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
@@ -41,33 +47,6 @@ if &term =~ '256color'
   set t_ut=
 endif
 
-" ~/.vimrc
-" Make Vim recognize XTerm escape sequences for Page and Arrow
-" keys combined with modifiers such as Shift, Control, and Alt.
-" See http://www.reddit.com/r/vim/comments/1a29vk/_/c8tze8p
-if &term =~ 'xterm'
-  " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
-  execute "set t_kP=\e[5;*~"
-  execute "set t_kN=\e[6;*~"
-  " Arrow keys http://unix.stackexchange.com/a/34723
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
-endif
-
-set nowrap                      " don't wrap lines
-set tabstop=2
-set shiftwidth=2      			" a tab is two spaces
-set expandtab                   " use spaces, not tabs
-set backspace=indent,eol,start  " backspace through everything in insert mode
-set paste
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital l
-set laststatus=1				" always show status line
-"set noshowmode
 
 " Highlight whitespace(s) at the end of line.
 autocmd VimEnter * :call matchadd('Error', '\s\+$', -1) | call matchadd('Error', '\%u00A0')
@@ -75,5 +54,11 @@ autocmd VimEnter * :call matchadd('Error', '\s\+$', -1) | call matchadd('Error',
 " Delete trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-" Disable powerline
-let g:powerline_loaded = 1
+highlight LeadingTab ctermbg=blue guibg=blue
+highlight LeadingSpace ctermbg=darkgreen guibg=darkgreen
+highlight EvilSpace ctermbg=darkred guibg=darkred
+au Syntax * syn match LeadingTab /^\t\+/
+au Syntax * syn match LeadingSpace /^\ \+/
+au Syntax * syn match EvilSpace /\(^\t*\)\@<!\t\+/ " tabs not preceeded by tabs
+au Syntax * syn match EvilSpace /[ \t]\+$/ " trailing space
+
