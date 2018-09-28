@@ -19,7 +19,7 @@ export HISTTIMEFORMAT="%a %b %Y %T %z "
 shopt -s checkwinsize
 
 # Git stuff
-bashgitprompt='$(__git_ps1 " (%s)")'
+BASHGITPROMPT='$(__git_ps1 " (%s)")'
 
 # SSH-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
@@ -44,15 +44,15 @@ for i in "${sourceme[@]}"; do
 done
 
 if [ -n "$SSH_CLIENT" ]; then
-  ssh='\[$(tput bold)\]\[\e[1m\]\[\033[38;5;254m\]\h\[$(tput sgr0)\] '
+  SSH='\[$(tput bold)\]\[\e[1m\]\[\033[38;5;199m\]\h\[$(tput sgr0)\] '
 fi
 
 if [[ "$USER" != "$DEFAULT_USERNAME" ]]; then
-  showuser='\[\033[38;5;199m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]\[$(tput bold)\] >\[$(tput sgr0)\] '
+  SHOWUSER='\[\033[38;5;254m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]\[$(tput bold)\] >\[$(tput sgr0)\] '
 fi
 
 if [ ${EUID} -eq 0 ]; then
-  export PS1=''"$showuser"''"$ssh"'\[\033[38;5;74m\]\w\[$(tput sgr0)\]'"$bashgitprompt "'\[\033[38;5;1m\]✖ \[$(tput sgr0)\]'
+  export PS1=''"$SHOWUSER"''"$SSH"'\[\033[38;5;74m\]\w\[$(tput sgr0)\]'"$BASHGITPROMPT "'\[\033[38;5;1m\]✖ \[$(tput sgr0)\]'
 else
-  export PS1=''"$showuser"''"$ssh"'\[\033[38;5;74m\]\w\[$(tput sgr0)\]'"$bashgitprompt "'\[\033[38;5;255m\]∞ \[$(tput sgr0)\]'
+  export PS1=''"$SHOWUSER"''"$SSH"'\[\033[38;5;74m\]\w\[$(tput sgr0)\]'"$BASHGITPROMPT "'\[\033[38;5;255m\]∞ \[$(tput sgr0)\]'
 fi
