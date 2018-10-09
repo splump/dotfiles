@@ -54,11 +54,11 @@ autocmd VimEnter * :call matchadd('Error', '\s\+$', -1) | call matchadd('Error',
 " Delete trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-highlight LeadingTab ctermbg=blue guibg=blue
-highlight LeadingSpace ctermbg=darkgreen guibg=darkgreen
+"highlight LeadingTab ctermbg=blue guibg=blue
+"highlight LeadingSpace ctermbg=darkgreen guibg=darkgreen
 highlight EvilSpace ctermbg=darkred guibg=darkred
-au Syntax * syn match LeadingTab /^\t\+/
-au Syntax * syn match LeadingSpace /^\ \+/
+"au Syntax * syn match LeadingTab /^\t\+/
+"au Syntax * syn match LeadingSpace /^\ \+/
 au Syntax * syn match EvilSpace /\(^\t*\)\@<!\t\+/ " tabs not preceeded by tabs
 au Syntax * syn match EvilSpace /[ \t]\+$/ " trailing space
 
