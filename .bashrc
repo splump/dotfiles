@@ -39,10 +39,10 @@ done
 # Source additional files if available
 
 sourceme=(
-  "$HOME/dotfiles/.ssh_aliases"
-  "$HOME/dotfiles/.bash_aliases"
-  "$HOME/dotfiles/.env_$(hostname)"
-  "$HOME/dotfiles/git-prompt.sh"
+  "$HOME/git/dotfiles/.ssh_aliases"
+  "$HOME/git/dotfiles/.bash_aliases"
+  "$HOME/git/dotfiles/.env_$(hostname)"
+  "$HOME/git/dotfiles/git-prompt.sh"
   #Requires bash-completion to be installed
   "/usr/share/bash-completion/bash_completion"
   #Requires command-not-found to be installed
