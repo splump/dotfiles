@@ -39,7 +39,6 @@ done
 # Source additional files if available
 
 sourceme=(
-  "$HOME/git/dotfiles/.ssh_aliases"
   "$HOME/git/dotfiles/.bash_aliases"
   "$HOME/git/dotfiles/.env_$(hostname)"
   "$HOME/git/dotfiles/git-prompt.sh"
