@@ -46,7 +46,7 @@ sourceme=(
   #Requires bash-completion to be installed
   "/usr/share/bash-completion/bash_completion"
   #Requires command-not-found to be installed
-	"/etc/profile.d/cnf.sh"
+  "/etc/profile.d/cnf.sh"
 )
 
 for i in "${sourceme[@]}"; do
