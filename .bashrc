@@ -6,7 +6,6 @@
 [[ $- != *i* ]] && return
 
 export SUDO_EDITOR=vim
-export PATH="$HOME/.bin:$PATH:/usr/bin/core_perl"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
 export HISTFILE="${HOME}/.bash_history"
@@ -23,6 +22,19 @@ BASHGITPROMPT='$(__git_ps1 " (%s)")'
 
 # SSH-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# Set up PATH
+
+addtopath=(
+	"$HOME/git/bin"
+	"$HOME/git/bin/${HOSTNAME}"
+)
+
+for i in "${addtopath[@]}"; do
+  if [[ -e "$i" ]]; then
+    export PATH="${i}:${PATH}:/usr/bin/core_perl"
+  fi
+done
 
 # Source additional files if available
 
