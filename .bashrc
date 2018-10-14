@@ -39,14 +39,13 @@ done
 # Source additional files if available
 
 sourceme=(
-  "$HOME/git/dotfiles/.ssh_aliases"
   "$HOME/git/dotfiles/.bash_aliases"
   "$HOME/git/dotfiles/.env_$(hostname)"
   "$HOME/git/dotfiles/git-prompt.sh"
   #Requires bash-completion to be installed
   "/usr/share/bash-completion/bash_completion"
   #Requires command-not-found to be installed
-	"/etc/profile.d/cnf.sh"
+  "/etc/profile.d/cnf.sh"
 )
 
 for i in "${sourceme[@]}"; do
