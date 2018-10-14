@@ -2,6 +2,11 @@
 set nocompatible
 filetype off
 
+" Plugin manager
+call plug#begin('~/.vim/plugged')
+Plug 'https://github.com/NLKNguyen/papercolor-theme.git'
+call plug#end()
+
 " Change the color scheme
 colorscheme PaperColor
 set background=dark
