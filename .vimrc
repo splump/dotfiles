@@ -3,8 +3,20 @@ set nocompatible
 filetype off
 
 " Plugin manager
+" To install plugin manager manually, run:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+" Install plugin manager automatically if not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Define plugins
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/NLKNguyen/papercolor-theme.git'
+Plug 'https://github.com/baskerville/vim-sxhkdrc.git'
 call plug#end()
 
 " Change the color scheme
