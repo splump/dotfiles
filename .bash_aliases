@@ -1,5 +1,6 @@
 alias vi="vim"
 alias ls="ls --color=auto --quoting-style=literal"
+alias ip="ip -c"
 alias l="ls -lah"
 alias t="ls -larth"
 alias last="last --fulltimes"
