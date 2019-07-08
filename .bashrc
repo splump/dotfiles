@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Check which OS we're running
+OSTYPE=$(uname -s)
+
 export SUDO_EDITOR=vim
 export EDITOR=vim
 export HISTCONTROL=ignoredups
@@ -20,6 +23,20 @@ shopt -s checkwinsize
 # Git stuff
 BASHGITPROMPT='$(__git_ps1 " (%s)")'
 
+# Do mac stuff
+if [[ "$OSTYPE" == "Darwin" ]]; then
+  if which brew >/dev/null 2>&1; then
+    if [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
+      source "$(brew --prefix)/etc/bash_completion"
+    else
+      echo "bash_completion not installed, not sourcing"
+    fi
+  fi
+  export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+  export WORKON_HOME=~/.virtualenvs
+  [[ -f "$(brew --prefix)/bin/virtualenvwrapper.sh" ]] && source "$(brew --prefix)/bin/virtualenvwrapper.sh"
+fi
+
 # SSH-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
@@ -28,6 +45,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 addtopath=(
 	"$HOME/git/bin"
 	"$HOME/git/bin/${HOSTNAME}"
+  "/usr/local/opt/python/libexec/bin"
 )
 
 for i in "${addtopath[@]}"; do
