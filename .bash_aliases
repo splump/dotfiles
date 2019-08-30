@@ -7,7 +7,7 @@ alias pacman="pacman --color auto"
 alias top="htop"
 alias remmina='rm -f $HOME/.config/freerdp/known_hosts2 && remmina'
 alias mount-hive='sshfs bishop:/hive /hive/ -o user,idmap=user,follow_symlinks,allow_other'
-alias weather='curl v2.wttr.in/Stockholm'
+alias weather='curl v2.wttr.in'
 
 if [[ "$OSTYPE" == "Linux" ]]; then
   alias ls="ls --color=auto --quoting-style=literal"
