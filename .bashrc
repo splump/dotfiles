@@ -64,6 +64,9 @@ sourceme=(
   "/usr/share/bash-completion/bash_completion"
   # Requires command-not-found to be installed
   "/etc/profile.d/cnf.sh"
+  # Requires fzf to be installed
+  "/usr/share/fzf/key-bindings.bash"
+  "/usr/share/fzf/completion.bash"
 )
 
 for i in "${sourceme[@]}"; do
