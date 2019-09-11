@@ -60,9 +60,9 @@ sourceme=(
   "$HOME/git/dotfiles/.bash_aliases"
   "$HOME/git/dotfiles/.env_$(hostname)"
   "$HOME/git/dotfiles/git-prompt.sh"
-  #Requires bash-completion to be installed
+  # Requires bash-completion to be installed
   "/usr/share/bash-completion/bash_completion"
-  #Requires command-not-found to be installed
+  # Requires command-not-found to be installed
   "/etc/profile.d/cnf.sh"
 )
 
