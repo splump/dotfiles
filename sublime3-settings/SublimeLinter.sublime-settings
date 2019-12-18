@@ -1,0 +1,15 @@
+// SublimeLinter Settings - User
+{
+    "lint_mode": "background",
+    "linters": {
+        "pydocstyle": {
+            "ignore": "D100,D101,D102,D103,D104,D105",
+        },
+        "pep8": {
+            "ignore": "E501"
+        },
+        "flake8": {
+            "args": ["--ignore=E501"],
+        }
+    }
+}
