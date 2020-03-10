@@ -1,3 +1,4 @@
 # Ignore this one in particular
 .vim/.netrwhist
+.env_Daniel-Andersson-MacBook-Air
 *.swp
