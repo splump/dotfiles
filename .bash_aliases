@@ -6,6 +6,8 @@ alias sudo="sudo -E "
 alias pacman="pacman --color auto"
 alias grep='grep --color=auto'
 alias rsync='rsync --info=progress2'
+alias pkill='pkill -i -e'
+alias pgrep='pgrep -i'
 alias top="htop"
 alias remmina='rm -f $HOME/.config/freerdp/known_hosts2 && remmina'
 alias mount-hive='sshfs bishop:/hive /hive/ -o user,idmap=user,follow_symlinks,allow_other'
