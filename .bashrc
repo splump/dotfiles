@@ -16,6 +16,7 @@ export HISTFILESIZE=5000
 export HISTIGNORE=
 export HISTSIZE=2000
 export HISTTIMEFORMAT="%a %b %Y %T %z "
+export WORKON_HOME=~/.virtualenvs
 
 # User colors in less
 
@@ -44,7 +45,6 @@ if [[ "$OSTYPE" == "Darwin" ]]; then
     fi
   fi
   export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-  export WORKON_HOME=~/.virtualenvs
   [[ -f "$(brew --prefix)/bin/virtualenvwrapper.sh" ]] && source "$(brew --prefix)/bin/virtualenvwrapper.sh"
 fi
 
@@ -78,6 +78,7 @@ sourceme=(
   # Requires fzf to be installed
   "/usr/share/fzf/key-bindings.bash"
   "/usr/share/fzf/completion.bash"
+  "/usr/bin/virtualenvwrapper.sh"
 )
 
 for i in "${sourceme[@]}"; do
