@@ -17,6 +17,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/NLKNguyen/papercolor-theme.git'
 Plug 'https://github.com/baskerville/vim-sxhkdrc.git'
+Plug 'https://github.com/robbles/logstash.vim.git'
 call plug#end()
 
 " Change the color scheme
