@@ -46,6 +46,10 @@ esac
 # Allows for e.g ztcp example.com 80
 zmodload zsh/net/tcp
 
+# Cache zsh completion results
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
