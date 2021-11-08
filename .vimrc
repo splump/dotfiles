@@ -18,17 +18,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/NLKNguyen/papercolor-theme.git'
 Plug 'https://github.com/baskerville/vim-sxhkdrc.git'
 Plug 'https://github.com/robbles/logstash.vim.git'
+Plug 'https://github.com/chriskempson/base16-vim.git'
 call plug#end()
 
 " Change the color scheme
-colorscheme PaperColor
+colorscheme base16-default-dark
 set background=dark
 
-" 24 bit colors
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
 endif
 
 " Disable vim mouse highlighting
