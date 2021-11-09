@@ -38,6 +38,8 @@ alias weather='curl v2.wttr.in'
 case "$OSTYPE" in
   darwin*)
     alias ls="ls -G"
+    # Set LS_COLORS for fzf (requires brew install coreutils)
+    eval $(gdircolors -b)
     fzf_base_dir="/opt/homebrew/var/homebrew/linked/fzf/shell"
   ;;
   linux*)
@@ -45,9 +47,12 @@ case "$OSTYPE" in
     alias pgrep='pgrep -i'
     alias ip="ip -c"
     alias ls="ls --color=auto --quoting-style=literal"
+    # Set LS_COLORS for fzf
+    eval $(dircolors -b)
     fzf_base_dir="/usr/share/fzf"
   ;;
 esac
+
 
 # Source fzf
 # Requires fzf to be installed, brew install fzf och MacOS
@@ -67,3 +72,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 
 # Try to complete with sudo
 zstyle ':completion::complete:*' gain-privileges 1
+
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
