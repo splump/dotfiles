@@ -56,6 +56,12 @@ source "${fzf_base_dir}/key-bindings.zsh"
 # Allows for e.g ztcp example.com 80
 zmodload zsh/net/tcp
 
+# For autocompletion of command line switches for aliases
+setopt COMPLETE_ALIASES
+
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# Try to complete with sudo
+zstyle ':completion::complete:*' gain-privileges 1
