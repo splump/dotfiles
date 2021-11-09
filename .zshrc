@@ -20,8 +20,10 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 # Source zsh plugins, requires installing antibody
 # curl -sfL git.io/antibody | sh -s - -b /usr/local/bin, brew install antibody or AUR
+# Order of loading plugins is important
 source <(antibody init)
 antibody bundle romkatv/powerlevel10k
+antibody bundle Aloxaf/fzf-tab
 antibody bundle zsh-users/zsh-syntax-highlighting
 antibody bundle zsh-users/zsh-autosuggestions
 
