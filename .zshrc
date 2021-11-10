@@ -77,3 +77,6 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Automatically rehash
 zstyle ':completion:*' rehash true
+
+# Load 24-bit color if terminal allows it
+[[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
