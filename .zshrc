@@ -53,7 +53,6 @@ case "$OSTYPE" in
   ;;
 esac
 
-
 # Source fzf
 # Requires fzf to be installed, brew install fzf och MacOS
 [[ $- == *i* ]] && source "${fzf_base_dir}/completion.zsh" 2> /dev/null
@@ -75,3 +74,6 @@ zstyle ':completion::complete:*' gain-privileges 1
 
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Automatically rehash
+zstyle ':completion:*' rehash true
