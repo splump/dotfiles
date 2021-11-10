@@ -35,6 +35,8 @@ alias rsync='rsync --info=progress2'
 alias top="htop"
 alias weather='curl v2.wttr.in'
 
+export EDITOR="vim"
+
 case "$OSTYPE" in
   darwin*)
     alias ls="ls -G"
