@@ -82,6 +82,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion::complete:*' gain-privileges 1
 
 # set list-colors to enable filename colorizing
+# run build-fzf-tab-module in the shell once to enable
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Automatically rehash
