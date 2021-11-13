@@ -73,6 +73,8 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 # Number of events stored in the zsh history file
 SAVEHIST=10000
+# Enable timestamps for zsh history
+setopt EXTENDED_HISTORY
 
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
