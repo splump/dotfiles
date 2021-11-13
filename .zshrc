@@ -67,6 +67,13 @@ zmodload zsh/net/tcp
 # For autocompletion of command line switches for aliases
 setopt COMPLETE_ALIASES
 
+# The file where the history is stored
+HISTFILE="$HOME/.zsh_history"
+# Number of events loaded into memory
+HISTSIZE=10000
+# Number of events stored in the zsh history file
+SAVEHIST=10000
+
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
