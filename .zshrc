@@ -77,6 +77,9 @@ SAVEHIST=10000
 # Enable timestamps for zsh history
 setopt EXTENDED_HISTORY
 
+# Emacs keybindings, necessary after setting EDITOR=vim
+bindkey -e
+
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
@@ -93,3 +96,4 @@ zstyle ':completion:*' rehash true
 
 # Load 24-bit color if terminal allows it
 [[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
+
