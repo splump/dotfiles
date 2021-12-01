@@ -1,6 +1,10 @@
 autoload -Uz compinit
 compinit
 
+# Emacs keybindings, necessary after setting EDITOR=vim, needs to be close to the top
+# or fzf will fail
+bindkey -e
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -76,9 +80,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 # Enable timestamps for zsh history
 setopt EXTENDED_HISTORY
-
-# Emacs keybindings, necessary after setting EDITOR=vim
-bindkey -e
 
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
