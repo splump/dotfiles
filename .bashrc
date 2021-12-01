@@ -73,11 +73,12 @@ sourceme=(
   "$HOME/git/dotfiles/git-prompt.sh"
   # Requires bash-completion to be installed
   "/usr/share/bash-completion/bash_completion"
-  # Requires command-not-found to be installed
-  "/etc/profile.d/cnf.sh"
+  # Requires pkgfile to be installed, run 'pkgfile -u'
+  "/usr/share/doc/pkgfile/command-not-found.bash"
   # Requires fzf to be installed
   "/usr/share/fzf/key-bindings.bash"
   "/usr/share/fzf/completion.bash"
+  # Requires virtualenvwrapper to be installed
   "/usr/bin/virtualenvwrapper.sh"
 )
 
