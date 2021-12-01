@@ -34,6 +34,7 @@ alias grep='grep --color=auto'
 alias rsync='rsync --info=progress2'
 alias top="htop"
 alias weather='curl v2.wttr.in'
+alias sway='source ~/.config/sway/envvars.conf && sway'
 
 export EDITOR="vim"
 
