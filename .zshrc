@@ -80,6 +80,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 # Enable timestamps for zsh history
 setopt EXTENDED_HISTORY
+# Make ZSH behave like bash with globbing
+setopt nonomatch
 
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
