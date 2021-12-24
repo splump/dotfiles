@@ -62,6 +62,26 @@ case "$OSTYPE" in
   ;;
 esac
 
+# Additional paths
+addtopath=(
+	"$HOME/git/bin"
+	"$HOME/git/bin/${HOSTNAME}"
+  "/usr/local/opt/python/libexec/bin"
+)
+
+# Discard duplicates from $PATH and $path
+typeset -U PATH path
+
+# Add all paths from addtopath array
+for i in "$addtopath[@]"; do
+  if [[ -e "$i" ]]; then
+    path+=("$i")
+  fi
+done
+
+# Export $PATH
+export PATH
+
 # Source fzf
 # Requires fzf to be installed, brew install fzf och MacOS
 [[ $- == *i* ]] && source "${fzf_base_dir}/completion.zsh" 2> /dev/null
