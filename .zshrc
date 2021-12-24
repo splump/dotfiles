@@ -57,6 +57,8 @@ case "$OSTYPE" in
     # Set LS_COLORS for fzf
     eval $(dircolors -b)
     fzf_base_dir="/usr/share/fzf"
+    export WORKON_HOME=~/.virtualenvs
+    source /usr/bin/virtualenvwrapper.sh
   ;;
 esac
 
