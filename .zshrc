@@ -65,7 +65,7 @@ esac
 # Additional paths
 addtopath=(
 	"$HOME/git/bin"
-	"$HOME/git/bin/${HOSTNAME}"
+	"$HOME/git/bin/${HOST}"
   "/usr/local/opt/python/libexec/bin"
 )
 
