@@ -59,6 +59,8 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital l
 set laststatus=1								" always show status line
 "set noshowmode
+" unix newlines
+set ffs=unix,dos
 
 " Bind Tab to switch between panes
 nnoremap <Tab> <c-w>w
