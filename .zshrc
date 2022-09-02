@@ -42,25 +42,27 @@ alias sway='source ~/.config/sway/envvars.conf && sway'
 
 export EDITOR="vim"
 
-case "$OSTYPE" in
-  darwin*)
-    alias ls="ls -G"
-    # Set LS_COLORS for fzf (requires brew install coreutils)
-    eval $(gdircolors -b)
-    fzf_base_dir="/opt/homebrew/var/homebrew/linked/fzf/shell"
-  ;;
-  linux*)
-    alias pkill='pkill -i -e'
-    alias pgrep='pgrep -i'
-    alias ip="ip -c"
-    alias ls="ls --color=auto --quoting-style=literal"
-    # Set LS_COLORS for fzf
-    eval $(dircolors -b)
-    fzf_base_dir="/usr/share/fzf"
-    export WORKON_HOME=~/.virtualenvs
-    source /usr/bin/virtualenvwrapper.sh
-  ;;
-esac
+OS="$(uname -a)"
+
+if [[ "$OS" == *WSL2* ]]; then
+  fzf_base_dir="/usr/share/doc/fzf/examples"
+  source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+elif [[ "$OS" == Darwin* ]]; then
+  alias ls="ls -G"
+  # Set LS_COLORS for fzf (requires brew install coreutils)
+  eval $(gdircolors -b)
+  fzf_base_dir="/opt/homebrew/var/homebrew/linked/fzf/shell"
+elif [[ "$OS" == *arch* ]]; then
+  alias pkill='pkill -i -e'
+  alias pgrep='pgrep -i'
+  alias ip="ip -c"
+  alias ls="ls --color=auto --quoting-style=literal"
+  # Set LS_COLORS for fzf
+  eval $(dircolors -b)
+  fzf_base_dir="/usr/share/fzf"
+  export WORKON_HOME=~/.virtualenvs
+  source /usr/bin/virtualenvwrapper.sh
+fi
 
 # Additional paths
 addtopath=(
