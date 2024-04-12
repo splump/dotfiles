@@ -107,6 +107,8 @@ SAVEHIST=10000
 setopt EXTENDED_HISTORY
 # Make ZSH behave like bash with globbing
 setopt nonomatch
+# Disable warning
+POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Cache zsh completion results
 zstyle ':completion:*' use-cache on
