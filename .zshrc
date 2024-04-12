@@ -61,6 +61,7 @@ elif [[ "$OS" == *arch* ]]; then
   eval $(dircolors -b)
   fzf_base_dir="/usr/share/fzf"
   export WORKON_HOME=~/.virtualenvs
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
   source /usr/bin/virtualenvwrapper.sh
 fi
 
